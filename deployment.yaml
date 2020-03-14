@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    run: debug
+  name: debug
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: debug
+  template:
+    metadata:
+      labels:
+        run: debug
+    spec:
+      containers:
+      - image: bikertales/docker-debug:latest
+        imagePullPolicy: Always
+        name: debug
+        command: ["/bin/sh"]
+        args: ["-c", "while true; do sleep 10;done"]

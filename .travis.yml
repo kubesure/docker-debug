@@ -1,0 +1,19 @@
+---
+language: generic
+sudo: false
+
+services:
+  - docker
+
+env:
+  global:
+    - secure: "lTkJWMFX8hyjD4diOdnLB2S363Rdk5tuxY71Q1oM1/aXdVHYDZwyc3YbLv9DMFYRF5eHmQ1tkBi/K/4/VGFlWomwvi+ePQfBjKeDhadXtCm7JS4KswVy7whUUaKrB7jdbB1Nlq3/p+2G07F5OdgFcYWXxMk3YUWqmIPwdghlnkZyrvMjSXyu7M2WEohV77LcHsqSpjcVAbXqmofCgLuHim6psmTWSvgzwENeAQusgDYq8jooaX+F1wyxR+yyFkMuiyOHdN5u3isIXqSFZLIdeYq71KNQrEjxfkKfiIpA1QiosnoiTHGOP4+B1tu2GBc/s7HH7c+ZSYzykqfh2gug5IREhHqx9rWfW7BS2iwN17YfKVCG05JbMVcap3RhMVr440IuSZPtVIkW/zz2MUCCz4DvOWRbteZ35043VSGRGH+UXcByEx5VM38qRNdDPx7sdDn21tPk5NBCoJoXOOSSS8CH10vJhmQssDFCPDw9dTKFpfHlY7fV68ZK1fb+mtBtia96MpvrKCAb2gP0ST4e/UYAfLHe3jXcmqdj+XAFA2+cwTuCRqTo6Qy3mqUzXWZdlK4JTvhWlvc1INgXOYJADI+J2XICK5fkqmB2JMGiq/bGONyWbBeaH4t3/HYqXrioE/DAyXXSQkun/wkMaYeO8lnMrQaIesENZTjO0Q5rpTA="
+
+before_script:
+  - echo ${QUAYIO_PASSWORD} | docker login -u="datawire+releasebot" --password-stdin quay.io
+
+script:
+  - docker build -t quay.io/datawire/grpcurl:latest .
+  - docker push quay.io/datawire/grpcurl:latest
+
+after_script: []
